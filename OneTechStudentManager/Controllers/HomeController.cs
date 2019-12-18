@@ -8,22 +8,17 @@ namespace OneTechStudentManager.Controllers
         public ActionResult Index()
         {
             var bsc = new StudentClientService();
-            ViewBag.listStudents = bsc.GetAllStudents();
-            return View(bsc.GetAllStudents());
+            var data = bsc.GetAllStudents();
+            if (data != null)
+            {
+                return View(data);
+            }
+            else
+            {
+                ViewBag.Message = "List is empty or service offline";
+                return View();
+            }
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
